@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soum - Buy, Sell, and Subscribe to Tech Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --soum-blue: #142C7C;
+            --soum-turquoise: #16C5D3;
+            --soum-light-gray: #f5f7fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        .soum-blue {
+            background-color: var(--soum-blue);
+        }
+        .soum-blue-text {
+            color: var(--soum-blue);
+        }
+        .soum-turquoise {
+            background-color: var(--soum-turquoise);
+        }
+        .soum-turquoise-text {
+            color: var(--soum-turquoise);
+        }
+        .soum-btn-primary {
+            background-color: var(--soum-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .soum-btn-primary:hover {
+            background-color: #0e2266;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .soum-btn-secondary {
+            background-color: var(--soum-turquoise);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .soum-btn-secondary:hover {
+            background-color: #14b3c0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .plan-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--soum-turquoise);
+        }
+        .innovation-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--soum-turquoise);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .value-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--soum-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .step-number {
+            background-color: var(--soum-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            background-color: var(--soum-light-gray);
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .page-fade {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .category-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - Always visible -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#home" onclick="navigateTo('home'); return false;">
+                    <img src="https://page1.genspark.site/v1/base64_upload/86ef00d77ec4664574dd12c5b5b22b31" alt="Soum Logo" class="h-12">
+                </a>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" onclick="navigateTo('home'); return false;" class="soum-blue-text font-semibold hover:soum-turquoise-text transition-colors">Home</a>
+                <a href="#products" onclick="navigateTo('home'); return false;" class="soum-blue-text font-semibold hover:soum-turquoise-text transition-colors">Products</a>
+                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-blue-text font-semibold hover:soum-turquoise-text transition-colors">Subscription</a>
+                <a href="#about" onclick="navigateTo('home'); return false;" class="soum-blue-text font-semibold hover:soum-turquoise-text transition-colors">About Us</a>
+                <a href="#contact" onclick="navigateTo('home'); return false;" class="soum-blue-text font-semibold hover:soum-turquoise-text transition-colors">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="#login" class="text-gray-600 hover:text-gray-900 transition-colors"><i class="fas fa-user mr-1"></i> Login</a>
+                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-primary">Subscribe Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active page-fade">
+        <!-- Home Hero Section -->
+        <section class="py-20 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6">Saudi Arabia's Leading Tech Marketplace</h1>
+                        <p class="text-xl mb-8">Buy, sell, and now subscribe to tech products with Soum - the trusted platform for all your technology needs.</p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-secondary text-center">Subscribe to Tech</a>
+                            <a href="#products" class="bg-white text-blue-900 font-bold py-3 px-6 rounded-lg text-center">Browse Products</a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="relative">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-turquoise-400 to-blue-500 rounded-lg blur opacity-75"></div>
+                            <div class="relative bg-white p-6 rounded-lg shadow-xl">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                        <i class="fas fa-mobile-alt text-4xl soum-blue-text mb-2"></i>
+                                        <p class="font-semibold soum-blue-text">Smartphones</p>
+                                    </div>
+                                    <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                        <i class="fas fa-laptop text-4xl soum-blue-text mb-2"></i>
+                                        <p class="font-semibold soum-blue-text">Laptops</p>
+                                    </div>
+                                    <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                        <i class="fas fa-tablet-alt text-4xl soum-blue-text mb-2"></i>
+                                        <p class="font-semibold soum-blue-text">Tablets</p>
+                                    </div>
+                                    <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                        <i class="fas fa-headphones text-4xl soum-blue-text mb-2"></i>
+                                        <p class="font-semibold soum-blue-text">Audio</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscription Highlight Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold soum-blue-text mb-4">Introducing Soum Subscription</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Experience technology without commitment. Subscribe to tech products instead of buying them outright.</p>
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center bg-gray-50 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h3 class="text-2xl font-bold soum-blue-text mb-4">Why Subscribe?</h3>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Always have the latest tech without high upfront costs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>All-inclusive protection against damage and malfunctions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Cancel anytime with no penalties</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Trade in your old devices for monthly discounts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Environmentally friendly approach to tech consumption</span>
+                            </li>
+                        </ul>
+                        <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-secondary">Explore Subscription Plans</a>
+                    </div>
+                    <div class="md:w-1/2 p-8 md:p-0">
+                        <div class="relative h-full">
+                            <div class="bg-gradient-to-r from-blue-900 to-blue-800 h-full flex items-center justify-center p-8 md:p-12">
+                                <div class="text-center text-white">
+                                    <h3 class="text-2xl font-bold mb-6">Choose Your Plan</h3>
+                                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
+                                        <div class="bg-white rounded-lg p-6 text-gray-800">
+                                            <h4 class="font-bold text-xl soum-blue-text mb-2">Innovation Plan</h4>
+                                            <p class="text-gray-600 mb-3">Always have the latest tech</p>
+                                            <span class="block font-bold text-2xl soum-blue-text">Fixed Monthly Fee</span>
+                                        </div>
+                                        <div class="bg-white rounded-lg p-6 text-gray-800">
+                                            <h4 class="font-bold text-xl soum-blue-text mb-2">Value Plan</h4>
+                                            <p class="text-gray-600 mb-3">Save money over time</p>
+                                            <span class="block font-bold text-2xl soum-blue-text">Decreasing Fee</span>
+                                        </div>
+                                    </div>
+                                    <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="bg-white text-blue-900 font-bold py-3 px-6 rounded-lg inline-block">View Full Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">Shop by Category</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="category-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-40 bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-5xl soum-blue-text"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg soum-blue-text mb-1">Smartphones</h3>
+                            <p class="text-gray-600 text-sm mb-3">New and pre-owned devices</p>
+                            <a href="#smartphones" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors text-sm">Browse Smartphones <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-40 bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-laptop text-5xl soum-blue-text"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg soum-blue-text mb-1">Laptops</h3>
+                            <p class="text-gray-600 text-sm mb-3">For work, gaming, and more</p>
+                            <a href="#laptops" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors text-sm">Browse Laptops <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-40 bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-tablet-alt text-5xl soum-blue-text"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg soum-blue-text mb-1">Tablets</h3>
+                            <p class="text-gray-600 text-sm mb-3">iPads and Android tablets</p>
+                            <a href="#tablets" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors text-sm">Browse Tablets <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-40 bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-headphones text-5xl soum-blue-text"></i>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg soum-blue-text mb-1">Audio</h3>
+                            <p class="text-gray-600 text-sm mb-3">Headphones, earbuds, speakers</p>
+                            <a href="#audio" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors text-sm">Browse Audio <i class="fas fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <a href="#all-categories" class="soum-btn-primary">View All Categories</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Products -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">Popular Products</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-4">
+                            <span class="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded mb-2">New</span>
+                            <h3 class="font-bold soum-blue-text">iPhone 15 Pro</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-bold">SAR 4,299</span>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="text-sm text-blue-600">or subscribe</a>
+                            </div>
+                            <div class="mt-4 flex space-x-2">
+                                <a href="#buy-now" class="soum-btn-primary text-sm py-2 flex-1 text-center">Buy Now</a>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-secondary text-sm py-2 flex-1 text-center">Subscribe</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-laptop text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-4">
+                            <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded mb-2">Popular</span>
+                            <h3 class="font-bold soum-blue-text">MacBook Air M3</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-bold">SAR 5,199</span>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="text-sm text-blue-600">or subscribe</a>
+                            </div>
+                            <div class="mt-4 flex space-x-2">
+                                <a href="#buy-now" class="soum-btn-primary text-sm py-2 flex-1 text-center">Buy Now</a>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-secondary text-sm py-2 flex-1 text-center">Subscribe</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-tablet-alt text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-4">
+                            <span class="inline-block px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded mb-2">Sale</span>
+                            <h3 class="font-bold soum-blue-text">iPad Pro 13"</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <div>
+                                    <span class="font-bold">SAR 3,799</span>
+                                    <span class="text-sm text-gray-500 line-through ml-2">SAR 4,199</span>
+                                </div>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="text-sm text-blue-600">or subscribe</a>
+                            </div>
+                            <div class="mt-4 flex space-x-2">
+                                <a href="#buy-now" class="soum-btn-primary text-sm py-2 flex-1 text-center">Buy Now</a>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-secondary text-sm py-2 flex-1 text-center">Subscribe</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-headphones text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-4">
+                            <span class="inline-block px-2 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded mb-2">Best Seller</span>
+                            <h3 class="font-bold soum-blue-text">AirPods Pro 2</h3>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-bold">SAR 899</span>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="text-sm text-blue-600">or subscribe</a>
+                            </div>
+                            <div class="mt-4 flex space-x-2">
+                                <a href="#buy-now" class="soum-btn-primary text-sm py-2 flex-1 text-center">Buy Now</a>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-secondary text-sm py-2 flex-1 text-center">Subscribe</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <a href="#all-products" class="soum-btn-primary">View All Products</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Soum -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">Why Choose Soum?</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                        <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-check-circle text-2xl soum-blue-text"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">Trusted Platform</h3>
+                        <p class="text-gray-600">With thousands of satisfied customers, Soum is Saudi Arabia's most trusted tech marketplace.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                        <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-truck text-2xl soum-blue-text"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">Fast Delivery</h3>
+                        <p class="text-gray-600">Get your products delivered to your doorstep quickly and securely, with tracking every step of the way.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                        <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-shield-alt text-2xl soum-blue-text"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">Buyer Protection</h3>
+                        <p class="text-gray-600">Shop with confidence knowing that all products are verified and your purchase is protected.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
+                            <h3 class="text-2xl font-bold mb-4 soum-blue-text">New to Soum: Subscription Service</h3>
+                            <p class="text-gray-600 mb-4">Experience the freedom of technology without ownership. Our new subscription service allows you to access the latest tech products for a simple monthly fee.</p>
+                            <ul class="space-y-2 mb-6">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>Choose from Innovation or Value plans</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>All-inclusive protection against damage</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                    <span>Cancel anytime with no penalties</span>
+                                </li>
+                            </ul>
+                            <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-secondary">Learn More About Subscription</a>
+                        </div>
+                        <div class="md:w-1/3">
+                            <div class="bg-gray-100 p-6 rounded-lg text-center">
+                                <i class="fas fa-sync-alt text-5xl soum-blue-text mb-4"></i>
+                                <h4 class="font-bold text-lg mb-2">Flexible Plans</h4>
+                                <p class="text-sm text-gray-600 mb-4">Choose the plan that works best for your lifestyle and budget.</p>
+                                <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors text-sm">View Plans <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">What Our Customers Say</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="testimonial-card bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold soum-blue-text">F</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Fahad A.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"Soum made selling my old iPhone so easy. I got a fair price, and the payment was processed quickly. Highly recommend!"</p>
+                    </div>
+                    
+                    <div class="testimonial-card bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold soum-blue-text">N</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Noura M.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"I tried the new subscription service and I'm loving it! No more worrying about my phone getting damaged, and I can upgrade whenever I want."</p>
+                    </div>
+                    
+                    <div class="testimonial-card bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold soum-blue-text">K</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Khalid S.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"I've been using Soum for years to buy and sell tech. Their customer service is exceptional, and the new subscription option is a game-changer."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download App -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl overflow-hidden">
+                    <div class="md:w-2/3 p-8 md:p-12 text-white">
+                        <h2 class="text-3xl font-bold mb-4">Download the Soum App</h2>
+                        <p class="text-xl mb-6">Buy, sell, and subscribe to tech products on the go. Get exclusive app-only deals and notifications.</p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="#app-store" class="bg-black text-white rounded-lg px-4 py-2 flex items-center">
+                                <i class="fab fa-apple text-2xl mr-3"></i>
+                                <div>
+                                    <span class="block text-xs">Download on the</span>
+                                    <span class="block font-bold">App Store</span>
+                                </div>
+                            </a>
+                            <a href="#google-play" class="bg-black text-white rounded-lg px-4 py-2 flex items-center">
+                                <i class="fab fa-google-play text-2xl mr-3"></i>
+                                <div>
+                                    <span class="block text-xs">GET IT ON</span>
+                                    <span class="block font-bold">Google Play</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3 p-8 md:p-0 flex justify-center">
+                        <div class="bg-white p-2 rounded-xl shadow-lg transform rotate-3">
+                            <div class="bg-gray-200 h-64 w-32 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-mobile-alt text-5xl text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscription Highlight Call to Action -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="bg-gradient-to-r from-blue-900 to-blue-800 rounded-lg p-8 md:p-12 text-center text-white">
+                    <h2 class="text-3xl font-bold mb-6">Experience Our New Subscription Service</h2>
+                    <p class="text-xl mb-8 max-w-3xl mx-auto">Say goodbye to traditional ownership. Subscribe to tech products for a simple monthly fee with full protection and flexibility.</p>
+                    <a href="#subscription" onclick="navigateTo('subscription'); return false;" class="soum-btn-secondary text-lg px-8 py-4">Explore Subscription Plans</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SUBSCRIPTION PAGE -->
+    <div id="subscription-page" class="page page-fade">
+        <!-- Hero Section -->
+        <section id="sub-home" class="py-20 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6">Subscribe to Technology, <span class="text-turquoise-400">Not Own It</span></h1>
+                        <p class="text-xl mb-8">Experience the latest tech devices with flexible monthly subscriptions. Upgrade whenever you want, cancel anytime.</p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="#sub-plans" class="soum-btn-secondary text-center">Explore Plans</a>
+                            <a href="#sub-how-it-works" class="bg-white text-blue-900 font-bold py-3 px-6 rounded-lg text-center">How It Works</a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="relative">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-turquoise-400 to-blue-500 rounded-lg blur opacity-75"></div>
+                            <div class="relative bg-white p-6 rounded-lg shadow-xl">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                        <i class="fas fa-mobile-alt text-4xl soum-blue-text mb-2"></i>
+                                        <p class="font-semibold soum-blue-text">Smartphones</p>
+                                    </div>
+                                    <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                        <i class="fas fa-laptop text-4xl soum-blue-text mb-2"></i>
+                                        <p class="font-semibold soum-blue-text">Laptops</p>
+                                    </div>
+                                    <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                        <i class="fas fa-tablet-alt text-4xl soum-blue-text mb-2"></i>
+                                        <p class="font-semibold soum-blue-text">Tablets</p>
+                                    </div>
+                                    <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                        <i class="fas fa-headphones text-4xl soum-blue-text mb-2"></i>
+                                        <p class="font-semibold soum-blue-text">Audio</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">Why Choose Soum Subscription?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                        <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-sync-alt text-2xl soum-blue-text"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">Always Up-to-Date</h3>
+                        <p class="text-gray-600">Get the latest devices without the high upfront costs. Upgrade when new models are released.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                        <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-shield-alt text-2xl soum-blue-text"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">Complete Protection</h3>
+                        <p class="text-gray-600">All subscriptions include protection against damage and malfunctions at no extra cost.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                        <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-hand-holding-usd text-2xl soum-blue-text"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">Flexible & Affordable</h3>
+                        <p class="text-gray-600">Cancel anytime with no penalties. Trade in your old devices for monthly discounts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plans Section -->
+        <section id="sub-plans" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 soum-blue-text">Choose Your Plan</h2>
+                <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Select the subscription plan that best fits your technology needs. Both plans include full protection and flexible terms.</p>
+                
+                <div class="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8 justify-center">
+                    <div class="plan-card bg-white rounded-lg shadow-lg p-8 md:w-1/3 relative">
+                        <div class="innovation-badge">Most Popular</div>
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold soum-blue-text mb-2">Innovation Plan</h3>
+                            <p class="text-gray-600">Always have the latest technology</p>
+                        </div>
+                        <div class="flex justify-center mb-6">
+                            <span class="text-4xl font-bold soum-blue-text">Fixed</span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Regular upgrades when new models are released</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Fixed monthly cost throughout subscription</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Full protection against damage and malfunctions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Perfect for early adopters and tech enthusiasts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Cancel anytime without penalties</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <a href="#" class="soum-btn-secondary inline-block w-full">Choose Innovation</a>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-card bg-white rounded-lg shadow-lg p-8 md:w-1/3 relative">
+                        <div class="value-badge">Best Value</div>
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold soum-blue-text mb-2">Value Plan</h3>
+                            <p class="text-gray-600">Save money over time</p>
+                        </div>
+                        <div class="flex justify-center mb-6">
+                            <span class="text-4xl font-bold soum-blue-text">Decreasing</span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Keep the same device throughout subscription</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Monthly fee decreases over time</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Full protection against damage and malfunctions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Environmentally friendly option</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Cancel anytime without penalties</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <a href="#" class="soum-btn-primary inline-block w-full">Choose Value</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="sub-how-it-works" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">How It Works - In 3 Simple Steps</h2>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-start mb-12">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 soum-blue-text">Find the ideal product for your needs</h3>
+                            <p class="text-gray-600 mb-4">Already know what you want or need a recommendation? No worries! Use the search bar or chat with our AI assistant to find the product that best meets your needs.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="bg-white p-3 rounded-lg shadow-md">
+                                        <i class="fas fa-search text-2xl soum-blue-text"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="font-semibold soum-blue-text">Browse our catalog</p>
+                                        <p class="text-sm text-gray-600">Search through our wide selection of smartphones, laptops, tablets, and audio devices</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row items-start mb-12">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 soum-blue-text">Subscribe to the perfect plan for you</h3>
+                            <p class="text-gray-600 mb-4">Want a product that's always up to date or prefer to keep it long-term and save money? Explore our plans and complete your subscription in just a few steps.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="bg-white p-3 rounded-lg shadow-md">
+                                        <i class="fas fa-clipboard-check text-2xl soum-blue-text"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="font-semibold soum-blue-text">Choose your subscription plan</p>
+                                        <p class="text-sm text-gray-600">Select between Innovation or Value plans based on your preferences and needs</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row items-start">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 soum-blue-text">Enjoy all the benefits of your subscription</h3>
+                            <p class="text-gray-600 mb-4">With our Soum Care, you're protected against accidental damage and malfunctions. Plus, you can cancel your subscription at any time depending on your needs.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="bg-white p-3 rounded-lg shadow-md">
+                                        <i class="fas fa-smile-beam text-2xl soum-blue-text"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="font-semibold soum-blue-text">Experience worry-free technology</p>
+                                        <p class="text-sm text-gray-600">Use your device with complete peace of mind knowing you're covered for repairs and replacements</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Protection & Trade-in Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg md:w-1/2">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-shield-alt text-2xl soum-blue-text"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold soum-blue-text">Soum Care Protection</h3>
+                        </div>
+                        <p class="text-gray-600 mb-6">No more worries about damage or malfunctions! Soum Care is our all-in protection that gives you peace of mind in any situation.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Accidental damage coverage</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Hardware malfunctions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Quick replacement service</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>No additional costs</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors">Learn more <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-lg md:w-1/2">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-exchange-alt text-2xl soum-blue-text"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold soum-blue-text">Trade-In & Save</h3>
+                        </div>
+                        <p class="text-gray-600 mb-6">Got a product you no longer use? With Soum Subscription, you can trade it in and get credit for a 33% discount on your subscription cost every month.</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Trade in any eligible device</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Up to 33% monthly discount</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Eco-friendly approach to technology</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Simple evaluation process</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors">Learn more <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="sub-testimonials" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">What Our Customers Say</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="testimonial-card bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold soum-blue-text">A</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Ahmed K.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"I've been using the Innovation Plan for 6 months and I love that I can always have the newest phone. The protection plan has already saved me once when I dropped my device!"</p>
+                    </div>
+                    
+                    <div class="testimonial-card bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold soum-blue-text">S</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Sarah M.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"The Value Plan is perfect for me. I don't need the latest model, and I love that my monthly fee actually decreases over time. It's so refreshing compared to traditional purchasing."</p>
+                    </div>
+                    
+                    <div class="testimonial-card bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-xl font-bold soum-blue-text">M</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Mohammed R.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"Customer service is exceptional. I had an issue with my laptop subscription and they resolved it immediately. Plus, being able to cancel anytime gives me peace of mind."</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <div class="inline-flex items-center bg-gray-100 px-6 py-3 rounded-full">
+                        <div class="flex text-yellow-400 mr-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="font-bold">4.7 out of 5</span>
+                        <span class="text-gray-500 ml-2">based on 450+ reviews</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">Popular Subscription Products</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold mb-2">iPhone 15 Pro</h3>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">Innovation Plan</span>
+                                <span class="font-bold soum-blue-text">SAR 199/mo</span>
+                            </div>
+                            <div class="flex justify-between mb-4">
+                                <span class="text-sm text-gray-500">Value Plan</span>
+                                <span class="font-bold soum-blue-text">SAR 249/mo <span class="text-sm text-gray-500">decreasing</span></span>
+                            </div>
+                            <a href="#" class="soum-btn-primary text-center block w-full">Subscribe Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-laptop text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold mb-2">MacBook Air M3</h3>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">Innovation Plan</span>
+                                <span class="font-bold soum-blue-text">SAR 349/mo</span>
+                            </div>
+                            <div class="flex justify-between mb-4">
+                                <span class="text-sm text-gray-500">Value Plan</span>
+                                <span class="font-bold soum-blue-text">SAR 399/mo <span class="text-sm text-gray-500">decreasing</span></span>
+                            </div>
+                            <a href="#" class="soum-btn-primary text-center block w-full">Subscribe Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-tablet-alt text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold mb-2">iPad Pro 13"</h3>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">Innovation Plan</span>
+                                <span class="font-bold soum-blue-text">SAR 249/mo</span>
+                            </div>
+                            <div class="flex justify-between mb-4">
+                                <span class="text-sm text-gray-500">Value Plan</span>
+                                <span class="font-bold soum-blue-text">SAR 299/mo <span class="text-sm text-gray-500">decreasing</span></span>
+                            </div>
+                            <a href="#" class="soum-btn-primary text-center block w-full">Subscribe Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:transform hover:scale-105">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-headphones text-6xl text-gray-400"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold mb-2">AirPods Pro 2</h3>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm text-gray-500">Innovation Plan</span>
+                                <span class="font-bold soum-blue-text">SAR 79/mo</span>
+                            </div>
+                            <div class="flex justify-between mb-4">
+                                <span class="text-sm text-gray-500">Value Plan</span>
+                                <span class="font-bold soum-blue-text">SAR 99/mo <span class="text-sm text-gray-500">decreasing</span></span>
+                            </div>
+                            <a href="#" class="soum-btn-primary text-center block w-full">Subscribe Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#" class="soum-btn-secondary">View All Products</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="sub-faq" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 soum-blue-text">Frequently Asked Questions</h2>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">How long will it take for the product to arrive?</h3>
+                        <p class="text-gray-600">Products are typically delivered within 1-3 business days after your subscription is approved. For popular items that are in stock, same-day or next-day delivery may be available in select areas.</p>
+                    </div>
+                    
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">What payment methods can I use?</h3>
+                        <p class="text-gray-600">We accept all major credit and debit cards, Apple Pay, Google Pay, and bank transfers. You can also pay using installment options through Tabby and Tamara at checkout.</p>
+                    </div>
+                    
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">Can I cancel my subscription?</h3>
+                        <p class="text-gray-600">Yes, you can cancel your subscription at any time with no penalties. Simply log into your account, go to your subscription section, and follow the cancellation process. Return shipping is free.</p>
+                    </div>
+                    
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">If I want to trade in a product, how do I send it?</h3>
+                        <p class="text-gray-600">When you select the trade-in option during subscription, we'll provide you with a free shipping label. Pack your device securely, attach the label, and drop it off at any approved shipping location. Once we receive and verify the device, your discount will be applied to your next billing cycle.</p>
+                    </div>
+                    
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-bold mb-2 soum-blue-text">What happens if my device gets damaged?</h3>
+                        <p class="text-gray-600">With Soum Care included in your subscription, you're fully covered for accidental damage and malfunctions. Simply report the issue through your account, and we'll arrange for repair or replacement at no additional cost.</p>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <p class="mb-4">Have other questions?</p>
+                        <a href="#" class="soum-btn-primary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold mb-6">Ready to Revolutionize Your Tech Experience?</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">Join thousands of satisfied customers who have switched from buying to subscribing. Get started today and enjoy the freedom of flexible technology access.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#sub-plans" class="soum-btn-secondary">Explore Plans</a>
+                    <a href="#" class="bg-white text-blue-900 font-bold py-3 px-6 rounded-lg">Browse Products</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-between">
+                <div class="w-full md:w-1/4 mb-8 md:mb-0">
+                    <img src="https://page1.genspark.site/v1/base64_upload/86ef00d77ec4664574dd12c5b5b22b31" alt="Soum Logo" class="h-12 mb-4">
+                    <p class="text-gray-400 mb-4">Experience the freedom of technology without the commitment of ownership.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/4 mb-8 md:mb-0">
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" onclick="navigateTo('home'); return false;" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#subscription" onclick="navigateTo('subscription'); return false;" class="text-gray-400 hover:text-white transition-colors">Subscription Plans</a></li>
+                        <li><a href="#sub-how-it-works" onclick="navigateTo('subscription'); return false;" class="text-gray-400 hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="#sub-testimonials" onclick="navigateTo('subscription'); return false;" class="text-gray-400 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="#sub-faq" onclick="navigateTo('subscription'); return false;" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="w-full md:w-1/4 mb-8 md:mb-0">
+                    <h4 class="text-xl font-bold mb-4">Products</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Smartphones</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Laptops</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Tablets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Audio Devices</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="w-full md:w-1/4">
+                    <h4 class="text-xl font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Riyadh, Saudi Arabia</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+966 123 456 789</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">subscription@soum.sa</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">&copy; 2025 Soum Subscription. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple page routing
+        function navigateTo(page) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => {
+                p.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(page + '-page').classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Initialize the home page as the default
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if URL has a hash for navigation
+            const hash = window.location.hash.replace('#', '');
+            if (hash === 'subscription') {
+                navigateTo('subscription');
+            } else {
+                navigateTo('home');
+            }
+            
+            // Handle direct hash links
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const target = this.getAttribute('href').replace('#', '');
+                    if (target === 'subscription') {
+                        e.preventDefault();
+                        navigateTo('subscription');
+                    } else if (target.startsWith('sub-') && document.getElementById('subscription-page').classList.contains('active')) {
+                        // Allow internal section navigation within subscription page
+                    } else if (target !== '' && document.getElementById('home-page').classList.contains('active')) {
+                        // Allow internal section navigation within home page
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
